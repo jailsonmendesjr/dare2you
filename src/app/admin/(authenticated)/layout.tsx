@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { Button } from '@/components/ui/button'
-import { Dumbbell, Users, Activity, LogOut } from 'lucide-react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Dumbbell, Users, Activity, LogOut, Menu } from 'lucide-react'
 
 export default async function AuthenticatedAdminLayout({ children }: { children: ReactNode }) {
   const supabase = await createClient()
@@ -30,7 +31,33 @@ export default async function AuthenticatedAdminLayout({ children }: { children:
             Sessões
           </Link>
         </nav>
-        <div className="flex items-center gap-4 ml-auto">
+        <div className="flex items-center gap-2 md:gap-4 ml-auto">
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Menu principal</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link href="/admin/daily-workouts" className="flex items-center gap-2 cursor-pointer w-full">
+                    <Dumbbell className="h-4 w-4" />
+                    Treinos do Dia
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/admin/sessions" className="flex items-center gap-2 cursor-pointer w-full">
+                    <Users className="h-4 w-4" />
+                    Sessões
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
           <span className="text-sm text-muted-foreground hidden sm:inline-block">{user.email}</span>
           <form action="/api/admin/logout" method="POST">
             <Button variant="ghost" size="icon" type="submit" title="Sair">
