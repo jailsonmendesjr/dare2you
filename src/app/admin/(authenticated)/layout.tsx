@@ -35,24 +35,18 @@ export default async function AuthenticatedAdminLayout({ children }: { children:
           {/* Mobile Navigation */}
           <div className="md:hidden">
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Menu principal</span>
-                </Button>
+              <DropdownMenuTrigger className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Menu principal</span>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem asChild>
-                  <Link href="/admin/daily-workouts" className="flex items-center gap-2 cursor-pointer w-full">
-                    <Dumbbell className="h-4 w-4" />
-                    Treinos do Dia
-                  </Link>
+                <DropdownMenuItem render={<Link href="/admin/daily-workouts" className="flex items-center gap-2 cursor-pointer w-full" />}>
+                  <Dumbbell className="h-4 w-4" />
+                  Treinos do Dia
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/admin/sessions" className="flex items-center gap-2 cursor-pointer w-full">
-                    <Users className="h-4 w-4" />
-                    Sessões
-                  </Link>
+                <DropdownMenuItem render={<Link href="/admin/sessions" className="flex items-center gap-2 cursor-pointer w-full" />}>
+                  <Users className="h-4 w-4" />
+                  Sessões
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
